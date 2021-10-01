@@ -60,6 +60,9 @@ height: 200px
 <div class="lds-dual-ringb"></div>
 </div>
 
+<iframe frameborder="0" onload="hideLoad()"></iframe>
+
+
 </body>
 </html>
 
@@ -74,20 +77,8 @@ var url = new URL(url_string);
 var id = url.searchParams.get("id");
 var playlist = url.searchParams.get("playlist");
 var center = url.searchParams.get("center");
+var src = "https://www.youtube.com/embed/${id}?autoplay=1&loop=1&showinfo=0&fs=0&rel=0&color=white&disablekb=1&playlist=${playlist}";
 
-var html = "";
-if (center == null || center == "") {
-html = `
-<iframe src="https://www.youtube.com/embed/` + id + `?autoplay=1&loop=1&showinfo=0&fs=0&rel=0&color=white&disablekb=1&playlist=${playlist}" frameborder="0" onload="hideLoad()"></iframe>
-`;
-} else {
-html = `
-<div class="main"><div class="wrapper">
-<iframe src="https://www.youtube.com/embed/` + id + `?autoplay=1&loop=1&showinfo=0&fs=0&rel=0&color=white&disablekb=1&playlist=${playlist}" frameborder="0" onload="hideLoad()"></iframe>
-</div></div>
-`;
-}
-
-document.write(html);
+document.getElementsByTagName("iframe")[0].src = src;
 
 </script>
