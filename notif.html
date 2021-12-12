@@ -7,7 +7,6 @@
 	body {
 	margin: 0; 
 	padding: 0; 
-	background: #fff;
 }
 a:hover, a {
 	text-decoration: none;
@@ -28,13 +27,27 @@ a:hover, a {
 <body>
 	
 <div class="konten">
-	<h1>Manfaatkan Fitur ini  !</h1>
-	<p>
-		apabila ada pertanyaan tentang aplikasi ini silahkan Hubungi Admin dengan  <br />
-		
-		menekan : <a href="https://wa.me/6283842183830/">KLIK DISINI</a>
-	</p>
+	<h1 id="title">Loading...</h1>
+	<p id="msg"></p>
 </div>
 
+<script>
+var title = document.getElementById('title');
+var msg = document.getElementById('msg');
+getData();
+
+function getData() {
+	var url = "https://talkin-apps-default-rtdb.firebaseio.com/Notif.json";
+	let req = new XMLHttpRequest();
+	req.responseType = 'json';
+	req.open('GET', url, true);
+	req.onload  = function() {
+		let data = req.response;
+		title.innerHTML = data.title;
+		msg.innerHTML = data.msg;
+	};
+	req.send(null);
+}
+</script>
 </body>
 </html>
